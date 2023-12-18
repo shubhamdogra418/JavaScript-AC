@@ -27,6 +27,19 @@ function outer() {
     } 
 } 
 
+//function composition
+const person= {
+    name: "shubham dogra",
+    greet() {
+        console.log(`object--- my name is ${this.name}`)
+    }
+};
+console.log("object", person.name);
+person.greet();
+
+//function composition
+// fxn inside the fxn
+
 //Question-- Create a function using the “function” keyword that takes a String as an argument &
 // returns the number of vowels in the string.
 
@@ -87,7 +100,7 @@ let marks=[80,90,85,92,94];
 console.log(marks.filter((e)=> e>90));
 
 // Take a number n as input from user. Create an array of numbers from 1 to n.
-let n=prompt("Enter a number");
+// let n=prompt("Enter a number");
 let nums=[];
 for(let i=1;i<=n;i++) {
     nums[i-1]=i;
