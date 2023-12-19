@@ -119,3 +119,10 @@ async function getInformation() {
 
 }
 getInformation();
+
+
+// //IIFE (immediately invoked function)
+//no need to call, and called only once 
+(function() {
+console.log("hello I'm IIFE")
+}) ();
