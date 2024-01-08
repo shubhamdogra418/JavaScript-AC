@@ -1,58 +1,142 @@
-//evolution from callback functions >> promises >> async and await
-const cart=["oreo", "dark fantasy", "almonds", "mangoes"];
-createOrder(cart);
-proceedToPayment(orderId);
+// const count= true;
+// let countValue= new Promise ( function (resolve, reject) {
+//     if(count) {
+//         resolve("promise resolve sexfully");
+//     } else {
+//         reject("promise has been rejected")
+//     }
+// });
 
-function createOrder (orderId) {
-    proceedToPayment(orderId);
+// console.log(countValue);
+
+// //error catching
+// let countVal =new Promise(function (resolve,  reject) {
+//     // resolve(" promise resolved");
+//     reject();
+// })
+// countVal .then (function success(result) {
+//     console.log(result);
+// });
+// countVal.catch(function notSuccess () {
+//     console.error("not succes");
+// })
+
+// console.log(countVal);
+
+//promise takes callback function
+// const getPromise= new Promise((resolve,reject)=> {
+//     // resolve("promise has been resolved");
+//     reject("promise has been rejected");
+// })
+
+// //then, catch also takes callback function
+// getPromise.then(()=> {
+//     console.log("fulfilled");
+// })
+// getPromise.catch(()=> {
+//     console.error("rejected");
+// })
+
+//fetching data from API
+const github = async ()=> {
+    const data=await  fetch( "https://api.github.com/users/shubhamdogra418");
+    const json= await data.json();
+    console.log(json);
+    document.body.append(json.avatar_url);
 }
-
-//as a callback function >> making CALLBACK HELL (PYRAMID OF DOOM)
-createOrder(cart, function (orderId) {
-    proceedToPayment(orderId, function (paymentInfo) {
-        showPaymentSummary(paymentInfo,  function () {
-            updateWalletBalance();
-        }); 
-    });
-});  //problemis inversion of control (giving control to something else)
-
-//PROMISE IS A PLACEHOLDER FOR A CERTAIN POINT OF TIME WHICH WILL BE FILLED WIHTH DATA AFTER A CERTAIN POINT OF TIME
-// A PROMISE IS AN OBJECT REPRESENTING THE EVENTUAL COMPLETION OF AN ASYNC OPERATION
-//returning a promise and store in promise object {undefined(first)}
-const promise= createOrder(cart);
-//promise will return an object >> as it is async so it will take time 
-// and after that it will fill the object with data
-
-promise.then(function (orderId) {
-    proceedToPayment(orderId);
-}); //it is gurantee that proceedToPayment will run for sure after promise get done with it
+github();
 
 
-//PROMISE CHAINING >> solution of CALLBACK HELL
-//setting the flow of data (return) also to avoid loosing of data
-createOrder(cart)
-.then(function (orderId) {
-    return proceedToPayment(orderId);
-})
-.then(function (paymentInfo) {
-    return showPaymentSummary(paymentInfo);
-})
-.then(function (paymentInfo) {
-    return updateWalletBalance();
-}) 
-
-//using arrow functions
-createOrder(cart)
-.then (orderId => proceedToPayment(orderId))
-.then(paymentInfo => showPaymentSummary(paymentInfo))
-.then(paymentInfo => updateWalletBalance(paymentInfo));
-
-//example
-const API_URL="https://api.github.com/users/shubhamdogra418";
-const user= fetch(API_URL);
-user.then(function(data) {
-    console.log(data);
-})
-
-//promise will be execute only once-- either- fullfilled, rejected, pending
-//promise objects are immutable, resolved only once
+// const promise = new Promise((resolve, reject) => {
+    //     let speed= 2;
+    //     console.log(speed);
+    //     if(speed > 5) {
+    //         resolve("downloaded successfully");
+    //     } else {
+    //         reject("low speed");
+    //     }
+    // })
+    //  .then((result)=> {
+    //     console.log("success")
+    //  })
+    //  .catch((result) => {
+    //     console.error(new Error("failed"))
+    // })
+    
+    
+    
+    // const div = document.getElementById('parent');
+    // function changeColor (color, delay) {
+    //     return new Promise((resolve, reject) => {
+    //         div.style.backgroundColor= color;
+    //         setTimeout(() => {
+    //             resolve("color changed")
+    //         }, delay);
+    //     })
+    // }
+    
+    // changeColor("green",2000);
+    // //ASYNC AWAIT
+    //     async function demo() {
+    //         await changeColor ("red",3000);
+    //         await changeColor ("blue",1000);
+    //         await changeColor ("green",1000);
+    //         await changeColor ("yellow",1000);
+    //         await changeColor ("black",1000);
+    //         await changeColor ("skyblue",1000);
+    //         await changeColor ("brown",1000);
+    //         await changeColor ("tomato",1000);
+    //         changeColor("gray",1000);
+    //     }
+    //     demo();
+    
+    
+    //PROMISE CHAINING
+    
+    // changeColor("red",1000)
+    // .then((result) => {
+    //     console.log("1st done", result);
+    //     return changeColor("blue",3000);
+    // })
+    // .then((result) => {
+    //     console.log("2nd done", result);
+    //     return changeColor("yellow", 1000);
+    // })
+    // .then((result)=> {
+    //     console.log("3rd done", result);
+    //     return changeColor("green",1000);
+    // })
+    // .catch((result) => {
+    //     console.error(new Error(result));
+    // })
+    // .finally("task has been done, final cleanup");
+    
+    
+    
+    //getting the API data
+    const h2= document.getElementById("h2");
+    const head2= document.getElementById("head2");
+    
+    // async function getCatFact () {
+    //     const data= await fetch("https://catfact.ninja/fact");
+    //     const json= await data.json();
+    //     console.log(json);
+    //     h2.innerText= json.fact;
+        
+    //     try {
+    //         const data2= await fetch("https://catfact.ninja/fact");
+    //         const json2= await data2.json();
+    //         console.log(json2);
+    //         head2.innerText= json2.fact;
+    
+    //     }
+    //     catch(err) {
+    //         console.log(err);
+    //     }
+    //     finally {
+    //         console.log('all data fetched');
+    //     }
+    // }
+    
+    // getCatFact();
+    
