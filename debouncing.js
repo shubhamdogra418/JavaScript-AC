@@ -21,7 +21,7 @@ const doDebounce=  function(fn, delay) {
         args=arguments;
         clearTimeout(timer);
         timer= setTimeout(() => {
-            getData.apply(context,arguments)
+            fn.apply(context,args)
         }, delay);
     }
 }

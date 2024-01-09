@@ -64,13 +64,42 @@ console.log(finalVal);
 
 
 //ARRAY.INCLUDES
-// console.log(arr.includes(439));
-// //Array.inlcudes prototype
-// Array.prototype.myArrayIncludes= function (searchElement) {
-//     for(let i=0;i< this.length;i++) {
-//         if( this[i] == searchElement ) {
-//             return true;
-//         }
-//     } return false;
-// }
-// console.log("Array.Includes prototype",  arr.myArrayIncludes(63));
+console.log(arr.includes(439));
+//Array.inlcudes prototype
+Array.prototype.myArrayIncludes= function (searchElement) {
+    for(let i=0;i< this.length;i++) {
+        if( this[i] == searchElement ) {
+            return true;
+        }
+    } return false;
+}
+console.log("Array.Includes prototype",  arr.myArrayIncludes(63));
+
+//throttling
+const throttle = function(func, delay) {
+    let flag= true;
+    return function() {
+        let context= this;
+        args=arguments;
+        if(flag) {
+            func.apply(context,args);
+            flag=false;
+            setTimeout(() => {
+                flag=true;
+            }, delay);
+        }
+    }
+}
+
+//pollyfills
+const doDebounce=  function(fn, delay) {
+    let timer;
+    return function() {
+        let context= this,
+        args=arguments;
+        clearTimeout(timer);
+        timer= setTimeout(() => {
+            fn.apply(context,args)
+        }, delay);
+    }
+}
